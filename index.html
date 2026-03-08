@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to 24IK2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══ CURSOR ══ -->
+  <div class="cursor"      id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ══ BACKGROUND ══ -->
+  <div class="bg-canvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-lines"></div>
+    <div class="dots-bg" id="dotsBg"></div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       PAGE LOGIN
+  ════════════════════════════════════════ -->
+  <main class="page" id="pageLogin">
+    <div class="login-layout">
+
+      <!-- LEFT PANEL -->
+      <div class="login-left">
+        <span class="logo">welcome To<span class="logo-dot"> </span>Our Website 24IK2</span>
+
+        <div class="login-left-content">
+          <div class="left-tag">&#x1F97D; Members or visitor</div>
+          <h1 class="left-title"><br> "Logic meets design, <em>code creates impact."</em></h1>
+          <p class="left-sub">Welcome to our website! Most people in our group are nice and hardworking, haha.</p>
+          <div class="left-features">
+            <div class="feature-item"><span class="feature-dot"></span><span>The best Leadership</span></div>
+            <div class="feature-item"><span class="feature-dot"></span><span>trusted informant &amp; history</span></div>
+            <div class="feature-item"><span class="feature-dot"></span><span>individuals who have various abilities</span></div>
+            <div class="feature-item"><span class="feature-dot"></span><span>extensive knowledge &amp; reliable editor</span></div>
+          </div>
+        </div>
+
+        <div class="plant-preview-card">
+          <span class="🥽">&#x1F97D;</span>
+          <div class="plant-preview-info">
+            <span class="plant-preview-name">Admin of 24IK2</span>
+            <span class="plant-preview-price">@willmngl</span>
+          </div>
+          <span class="plant-preview-deal">Status > Online</span>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="login-right">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tabLogin"    onclick="switchTab('login')"> Login </button>
+          <button class="auth-tab"        id="tabRegister" onclick="switchTab('register')"> register </button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div class="auth-form" id="formLogin">
+          <div class="form-header">
+            <h2 class="form-title">Welcome Back</h2>
+            <p class="form-sub">Enter your id user to continue</p>
+          </div>
+          <div class="alert alert-error" id="loginError" style="display:none;">&#9888; Incorrect email or password.</div>
+          <div class="input-group">
+            <input type="email" id="loginEmail" placeholder=" " autocomplete="email" />
+            <label for="loginEmail">Email Address or username</label>
+            <span class="input-icon">&#9993;</span>
+          </div>
+          <div class="input-group">
+            <input type="password" id="loginPass" placeholder=" " autocomplete="current-password" />
+            <label for="loginPass">Password</label>
+            <button class="toggle-pass" type="button" onclick="togglePass('loginPass',this)" tabindex="-1">&#128065;</button>
+          </div>
+          <div class="form-row">
+            <label class="check-label"><input type="checkbox" id="rememberMe" checked /> Remember me</label>
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </div>
+          <button class="btn-submit" id="loginBtn" onclick="doLogin()">
+            <span id="loginBtnText"> Confirm </span><span class="btn-arrow">&#8594;</span>
+          </button>
+          <div class="form-footer"> dont have account? <a href="#" onclick="switchTab('register');return false;">Create one for free</a></div>
+          <div class="demo-hint">&#128161; vist  only: <strong> vist@gmail.com</strong> / <strong>visit1909</strong></div>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div class="auth-form" id="formRegister" style="display:none;">
+          <div class="form-header">
+            <h2 class="form-title">Create Account</h2>
+            <p class="form-sub">Join the 24IK2 community</p>
+          </div>
+          <div class="alert alert-success" id="registerSuccess" style="display:none;">&#10003; Account created! Switching to sign in...</div>
+          <div class="input-row">
+            <div class="input-group">
+              <input type="text" id="regFirstName" placeholder=" " />
+              <label for="regFirstName">First Name</label>
+            </div>
+            <div class="input-group">
+              <input type="text" id="regLastName" placeholder=" " />
+              <label for="regLastName">Last Name</label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="email" id="regEmail" placeholder=" " autocomplete="email" />
+            <label for="regEmail">Email Address</label>
+            <span class="input-icon">&#9993;</span>
+          </div>
+          <div class="input-group">
+            <input type="password" id="regPass" placeholder=" " autocomplete="new-password" />
+            <label for="regPass">Password (min 6 chars)</label>
+            <button class="toggle-pass" type="button" onclick="togglePass('regPass',this)" tabindex="-1">&#128065;</button>
+          </div>
+          <div class="input-group">
+            <input type="password" id="regPassConfirm" placeholder=" " autocomplete="new-password" />
+            <label for="regPassConfirm">Confirm Password</label>
+          </div>
+          <label class="check-label" style="margin-bottom:24px;display:flex;gap:8px;">
+            <input type="checkbox" id="agreeTerms" />
+            I agree to the <a href="#" style="color:var(--bright);margin-left:4px;">Terms &amp; Privacy</a>
+          </label>
+          <button class="btn-submit" id="registerBtn" onclick="doRegister()">
+            <span id="registerBtnText">Create Account</span><span class="btn-arrow">&#8594;</span>
+          </button>
+          <div class="form-footer">Already have an account? <a href="#" onclick="switchTab('login');return false;">Sign in</a></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- ════════════════════════════════════════
+       PAGE SHOP (tersembunyi sampai login)
+  ════════════════════════════════════════ -->
+  <div class="page" id="pageShop" style="display:none;">
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+      <span class="logo">24IK2<span class="logo-dot">-</span>WebSite</span>
+      <ul class="nav-links">
+        <li><a href="#" onclick="smoothScroll('Who are we?');return false;"> who are we?</a></li>
+        <li><a href="#" onclick="smoothScroll('Photos');return false;">Photos</a></li>
+        <li><a href="#" onclick="smoothScroll('About Us');return false;">About Us</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="icon-btn" title="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="icon-btn" title="Cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <div class="user-badge">
+          <span>🤠</span>
+          <span class="user-name" id="userName">User</span>
+        </div>
+        <button class="btn-logout" onclick="doLogout()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Logout
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <div class="hero-tag reveal">&#127807; Thanks for visit</div>
+        <h1 class="hero-title reveal">Plant Power<br><em>for Your Space</em></h1>
+        <p class="hero-sub reveal">Find the perfect plants and essentials<br>for a greener, more vibrant home.</p>
+        <div class="hero-actions reveal">
+          <a href="#" class="btn-primary" onclick="smoothScroll('Who are we?');return false;">Shop Now <span class="arrow">&rsaquo;</span></a>
+          <a href="#" class="btn-ghost-link" onclick="smoothScroll('About Us');return false;">View Guides</a>
+        </div>
+        <div class="hero-stats reveal">
+          <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Plant Varieties</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">12k</span><span class="stat-label">Happy Customers</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">4.9&#9733;</span><span class="stat-label">Avg Rating</span></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-plant-card">
+          <div class="plant-emoji-big">&#127807;</div>
+          <div class="plant-badge">Featured</div>
+          <div class="plant-info-hero">
+            <span class="plant-name-hero">Monstera Deliciosa</span>
+            <span class="plant-price-hero">$21.95</span>
+          </div>
+        </div>
+        <div class="hero-bg-circle"></div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section" id="Who are we?">
+      <div class="section-header reveal">
+        <div>
+          <h2 class="section-title">Explore Our <em>Categories</em></h2>
+          <p class="section-sub">The perfect plants and accessories to bring nature into your home.</p>
+        </div>
+        <a href="#" class="btn-outline-sm">Shop All &rsaquo;</a>
+      </div>
+      <div class="filter-tabs reveal">
+        <button class="tab active" data-filter="all">All</button>
+        <button class="tab" data-filter="outdoor">Outdoor Plants</button>
+        <button class="tab" data-filter="indoor">Indoor Plants</button>
+        <button class="tab" data-filter="accessories">Accessories</button>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <div class="product-card reveal" data-cat="indoor">
+          <div class="product-img"><span class="product-emoji">&#127807;</span><button class="wishlist-btn">&#9825;</button></div>
+          <div class="product-info"><span class="product-name">Monstera Deliciosa</span><span class="product-price">$21.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+        <div class="product-card reveal reveal-delay-1" data-cat="indoor">
+          <div class="product-img"><span class="product-emoji">&#127795;</span><button class="wishlist-btn">&#9825;</button></div>
+          <div class="product-info"><span class="product-name">Dracaena Marginata</span><span class="product-price">$29.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+        <div class="product-card reveal reveal-delay-2" data-cat="indoor">
+          <div class="product-img"><span class="product-emoji">&#127808;</span><button class="wishlist-btn">&#9825;</button></div>
+          <div class="product-info"><span class="product-name">Snake Plant</span><span class="product-price">$18.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+        <div class="product-card reveal reveal-delay-3" data-cat="indoor">
+          <div class="product-img"><span class="product-emoji">&#127793;</span><button class="wishlist-btn">&#9825;</button></div>
+          <div class="product-info"><span class="product-name">Rubber Plant</span><span class="product-price">$24.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+        <div class="product-card reveal" data-cat="outdoor">
+          <div class="product-img"><span class="product-emoji">&#127794;</span><button class="wishlist-btn">&#9825;</button></div>
+          <div class="product-info"><span class="product-name">Peace Lily</span><span class="product-price">$16.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+        <div class="product-card reveal reveal-delay-1" data-cat="outdoor">
+          <div class="product-img"><span class="product-emoji">&#127796;</span><button class="wishlist-btn">&#9825;</button></div>
+          <div class="product-info"><span class="product-name">Bamboo Palm</span><span class="product-price">$32.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+        <div class="product-card reveal reveal-delay-2" data-cat="accessories">
+          <div class="product-img"><span class="product-emoji">&#129758;</span><button class="wishlist-btn">&#9825;</button></div>
+          <div class="product-info"><span class="product-name">Ceramic Pot Set</span><span class="product-price">$19.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+        <div class="product-card reveal reveal-delay-3" data-cat="accessories">
+          <div class="product-img"><span class="product-emoji">&#128692;</span><button class="wishlist-btn">&#9825;</button></div>
+          <div class="product-info"><span class="product-name">Gardening Tool Kit</span><span class="product-price">$27.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEST SELLERS -->
+    <section class="section bestsellers-section" id="Photos">
+      <div class="section-header reveal">
+        <div>
+          <h2 class="section-title">Best <em>Sellers</em></h2>
+          <p class="section-sub">The best tools and supplies to keep your plants thriving.</p>
+        </div>
+      </div>
+      <div class="bestsellers-grid">
+        <div class="best-card reveal">
+          <div class="best-img"><span class="best-emoji">&#127807;</span><span class="best-badge">Best Seller</span></div>
+          <div class="best-info"><span class="best-name">Premium Potting Soil Mix</span><span class="best-price">$12.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+        <div class="best-card reveal reveal-delay-1">
+          <div class="best-img"><span class="best-emoji">&#128692;</span><span class="best-badge">Popular</span></div>
+          <div class="best-info"><span class="best-name">Stylish Watering Can</span><span class="best-price">$34.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+        <div class="best-card reveal reveal-delay-2">
+          <div class="best-img"><span class="best-emoji">&#127758;</span><span class="best-badge">New</span></div>
+          <div class="best-info"><span class="best-name">Natural Plant Fertilizer</span><span class="best-price">$15.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+        <div class="best-card reveal reveal-delay-3">
+          <div class="best-img"><span class="best-emoji">&#129758;</span></div>
+          <div class="best-info"><span class="best-name">Grow Light LED Panel</span><span class="best-price">$38.95</span></div>
+          <button class="product-arrow">&#8594;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER -->
+    <section class="banner-cta reveal">
+      <div class="banner-content">
+        <h2 class="banner-title">Transform Your Space<br><em>with Vibrant Plants</em></h2>
+        <p class="banner-sub">Curated collections for every space and skill level.</p>
+        <a href="#" class="btn-primary" onclick="smoothScroll('categories');return false;">Shop Now <span class="arrow">&rsaquo;</span></a>
+      </div>
+      <div class="banner-deco"><span>&#127807;</span><span>&#127795;</span><span>&#127793;</span></div>
+    </section>
+
+    <!-- GUIDES -->
+    <section class="section" id="About Us">
+      <div class="section-header reveal">
+        <div>
+          <h2 class="section-title">Tips &amp; <em>Guides</em></h2>
+          <p class="section-sub">Expert advice to help your plants thrive all year round.</p>
+        </div>
+        <a href="#" class="btn-outline-sm">View All &rsaquo;</a>
+      </div>
+      <div class="guides-grid">
+        <div class="guide-card reveal">
+          <div class="guide-icon">&#9728;&#65039;</div>
+          <div class="guide-tag">Beginner</div>
+          <h3 class="guide-title">How to Water Your Plants the Right Way</h3>
+          <p class="guide-desc">Learn the optimal watering schedule for indoor and outdoor plants throughout all seasons.</p>
+          <a href="#" class="guide-link">Read More &rarr;</a>
+        </div>
+        <div class="guide-card reveal reveal-delay-1">
+          <div class="guide-icon">&#127769;</div>
+          <div class="guide-tag">Care</div>
+          <h3 class="guide-title">Best Plants for Low Light Environments</h3>
+          <p class="guide-desc">Discover which plants thrive in shaded corners and rooms with minimal sunlight.</p>
+          <a href="#" class="guide-link">Read More &rarr;</a>
+        </div>
+        <div class="guide-card reveal reveal-delay-2">
+          <div class="guide-icon">&#127807;</div>
+          <div class="guide-tag">Advanced</div>
+          <h3 class="guide-title">Propagating Your Plants at Home</h3>
+          <p class="guide-desc">Step-by-step guide to multiply your favourite plants using cuttings and division.</p>
+          <a href="#" class="guide-link">Read More &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo">FinVault<span class="logo-dot">.</span>Shop</span>
+          <p>Bringing nature closer to home, one plant at a time.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4>Shop</h4>
+            <ul>
+              <li><a href="#">Indoor Plants</a></li>
+              <li><a href="#">Outdoor Plants</a></li>
+              <li><a href="#">Accessories</a></li>
+              <li><a href="#">Best Sellers</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Help</h4>
+            <ul>
+              <li><a href="#">Shipping Info</a></li>
+              <li><a href="#">Returns</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-social">
+          <h4>Follow us</h4>
+          <div class="social-row">
+            <a href="https://www.instagram.com/" target="_blank" class="social-link" title="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="https://twitter.com/" target="_blank" class="social-link" title="Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com/" target="_blank" class="social-link" title="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 FinVault Shop. All rights reserved.</span>
+      </div>
+    </footer>
+
+  </div><!-- /pageShop -->
+
+  <!-- Toast -->
+  <div class="toast" id="toastEl"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
